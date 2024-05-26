@@ -83,7 +83,7 @@ function createLauf() {
 onMounted(() => {
     const urlParts = window.location.pathname.split('/');
     const potentialId = urlParts.pop();
-    id.value = /^\d+$/.test(potentialId) ? potentialId : undefined;
+    id.value = /^\d+$/.test(potentialId || '') ? potentialId : undefined;
     if (id){
         console.log('lauf Id: ', id.value);
     } else {
