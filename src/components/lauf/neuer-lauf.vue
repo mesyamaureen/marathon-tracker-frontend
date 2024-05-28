@@ -17,7 +17,9 @@ const beschreibungField = ref('')
 const schmerzField = ref('')
 
 function createLauf() {
-    const endPoint = 'http://localhost:8080/lauf';
+    // const endPoint = 'http://localhost:5432/lauf';
+    const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    const endPoint = baseUrl + '/lauf';
     const neuLauf: Lauf = {
         datum: datumField.value,
         art: artField.value,

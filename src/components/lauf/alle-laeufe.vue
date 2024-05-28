@@ -55,7 +55,9 @@ export type Lauf = { id?: number, titel: string, datum: Date, art: string, dista
 const alleLaeufe: Ref<Lauf[]> = ref([]);
 
 function loadLaeufe() {
-    const endPoint = 'http://localhost:8080/alleLaeufe';
+    // const endPoint = 'http://localhost:5432/alleLaeufe';
+    const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    const endPoint = baseUrl + '/alleLaeufe';
     const requestOptions: RequestInit = {
         method: "GET",
         redirect: "follow"

@@ -37,7 +37,9 @@ function getLauf(laufId: number){
 }
 // TODO: saveLauf(id){} then go back to startseite-laufer with actualized list
 function saveLauf(laufId: number) {
-    const endPoint = `http://localhost:8080/alleLaeufe/${laufId}`;
+    // const endPoint = `http://localhost:5432/alleLaeufe/${laufId}`;
+    const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    const endPoint = baseUrl + '/alleLaeufe/${laufId}';
     const d = {
         datum: datumField.value,
         art: artField.value,
@@ -53,7 +55,9 @@ function saveLauf(laufId: number) {
 // TODO: deleteLauf(id){} then go back to startseite-laufer with actualized list
 
 function createLauf() {
-    const endPoint = 'http://localhost:8080/lauf';
+    // const endPoint = 'http://localhost:5432/lauf';
+    const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    const endPoint = baseUrl + '/lauf}';
     const neuLauf: Lauf = {
         datum: datumField.value,
         art: artField.value,
