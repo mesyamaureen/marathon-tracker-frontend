@@ -17,22 +17,26 @@ import sidebarNav from '@/components/sidebar-nav.vue'
       </nav>
   </header> -->
   <main>
+    <h1 class="content"> TEST Übersicht </h1>
     <!-- <alle-laeufe title="Deine Läufe" /> -->
   </main>
 
-  <RouterView />
+  <RouterView class="content"/>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
-  margin: 2rem 2rem 0 2rem;
+  margin: 2rem 2rem 0 0;
   width: 100%;
   display: flex;
   flex-direction: row;
+  padding-left: 175px;
 }
-
+.content {
+  padding-left: 175px;
+}
 .logo {
   display: flex;
   place-items: center;
