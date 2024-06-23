@@ -16,10 +16,6 @@ import sidebarNav from '@/components/sidebar-nav.vue'
         <RouterLink to="/">Ausloggen</RouterLink>
       </nav>
   </header> -->
-  <main>
-    <h1 class="content"> TEST Übersicht </h1>
-    <!-- <alle-laeufe title="Deine Läufe" /> -->
-  </main>
 
   <RouterView class="content"/>
 </template>
@@ -36,6 +32,8 @@ header {
 }
 .content {
   padding-left: 175px;
+  padding-right: 20px;
+  width: 100%;
 }
 .logo {
   display: flex;
