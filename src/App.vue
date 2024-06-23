@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import sidebarNav from '@/components/sidebar-nav.vue'
 </script>
 
 <template>
-
-  <header>
+  <sidebar-nav />
+  <!-- <header>
     <RouterLink to="/startseite-laufer">
       <img alt="Vue logo" class="logo" src="@/assets/runnerslog_logo.png" width="350" height="70"/>
     </RouterLink>
@@ -14,10 +15,14 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/MeinProfil">Mein Profil</RouterLink>
         <RouterLink to="/">Ausloggen</RouterLink>
       </nav>
-  </header>
+  </header> -->
+  <main>
+    <!-- <alle-laeufe title="Deine Läufe" /> -->
+  </main>
 
   <RouterView />
 </template>
+
 <style scoped>
 header {
   line-height: 1.5;
