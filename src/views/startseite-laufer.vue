@@ -1,98 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import alleLaeufe from '@/components/lauf/alle-laeufe.vue';
-
-// const tage = [
-//   {
-//     heading: 'Montag',
-//     datum: '01.07.2024',
-//     art: 'Easy Run',
-//     km: '5',
-//     description: 'Do it easy',
-//     status: false
-//   },
-//   {
-//     heading: 'Dienstag',
-//     datum: '02.07.2024',
-//     art: 'Easy Run',
-//     km: '5',
-//     description: 'Do it easy',
-//     status: false
-//   },
-//   {
-//     heading: 'Mittwoch',
-//     datum: '03.07.2024',
-//     art: 'Rest',
-//     km: '0',
-//     description: 'Rest',
-//     status: false
-//   },
-//   {
-//     heading: 'Donnerstag',
-//     datum: '04.07.2024',
-//     art: 'Easy',
-//     km: '7',
-//     description: 'Do it easy',
-//     status: false
-//   },
-//   {
-//     heading: 'Freitag',
-//     datum: '05.07.2024',
-//     art: 'Rest',
-//     km: '0',
-//     description: 'Rest',
-//     status: false
-//   },
-//   {
-//     heading: 'Samstag',
-//     datum: '06.07.2024',
-//     art: 'Long Run',
-//     km: '12',
-//     description: 'Do it easy',
-//     status: false
-//   },
-//   {
-//     heading: 'Sonntag',
-//     datum: '07.07.2024',
-//     art: 'Rest',
-//     km: '0',
-//     description: 'Rest',
-//     status: false
-//   }
-// ]
-
 </script>
 
 <template>
   <main>
-    <!-- <div class="title">
-      <h1>Laufübersicht dieser Woche</h1>
-    </div>
-
-    <div class="items">
-      <itemBox v-for="(tag, index) in tage" :key="index">
-        <template #icon>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </template>
-        <template #heading>{{ tag.heading }}</template>
-        <p style="padding: 20px 0 10px 0">{{ tag.datum }}</p>
-        <p style="padding-top: 10px;">{{ tag.art }}</p>
-        <p style="padding-top: 10px;">{{ tag.km }} km</p> -->
-        <!-- <p style="padding-top: 10px;">{{ tag.description }}</p>
-      </itemBox>
-    </div>  -->
     <div>
       <alleLaeufe title="Läufe"/>
     </div>

@@ -4,74 +4,66 @@
       <h1>Laufübersicht dieser Woche</h1>
     </div>
 
-    <!-- <div class="items">
-      <itemBox v-for="(Lauf, index) in alleLaeufe" :key="index">
-        <template #icon>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-        </template>
-        <template #heading>{{ Lauf.titel }}</template>
-        <p style="padding: 20px 0 10px 0">{{ tag.datum }}</p>
-        <p style="padding-top: 10px;">{{ tag.art }}</p>
-        <p style="padding-top: 10px;">{{ tag.km }} km</p> -->
-        <!-- <p style="padding-top: 10px;">{{ Lauf.beschreibung }}</p>
-      </itemBox>
-    </div> -->
-
     <div>
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Datum</th>
-        <th>Art</th>
-        <th>Titel</th>
-        <th>Distanz</th>
-        <th>Zeit</th>
-        <th>Gefühl</th>
-        <th>Aufwand</th>
-        <th>Beschreibung</th>
-        <th>Schmerz</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-if="alleLaeufe.length === 0">
-        <td colspan="10">Kein Lauf</td>
-      </tr>
-      <tr v-for="l in alleLaeufe" :key="l.id">
-        <td>{{l.id}}</td>
-        <td>{{l.datum}}</td>
-        <td id="art-clickable" @click="handleClick()">{{l.art}}</td>
-        <td>{{l.titel}}</td>
-        <td>{{l.distanz}}</td>
-        <td>{{l.zeit}}</td>
-        <td>{{l.gefuehl}}</td>
-        <td>{{l.aufwand}}</td>
-        <td>{{l.beschreibung}}</td>
-        <td>{{l.schmerz}}</td>
-      </tr>
-      </tbody>
-    </table>
+      <h2> To Do Läufe </h2>
+      <div class="items">
+        <itemBox v-for="(ToDoLauf, index) in currentWeekToDoLäufe" :key="index">
+          <template #icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </template>
+          <template #heading>{{ ToDoLauf.titel }}</template>
+          <p style="padding: 20px 0 10px 0">{{ ToDoLauf.datum }}</p>
+          <p style="padding-top: 10px;">{{ ToDoLauf.art }}</p>
+          <p style="padding-top: 10px;">{{ ToDoLauf.distanz }} km</p>
+          <p style="padding-top: 10px;">{{ ToDoLauf.beschreibung }}</p>
+        </itemBox>
+      </div>
+      <div>
+        <h2> Läufe </h2>
+        <div class="items">
+        <itemBox v-for="(Lauf, index) in currentWeekLäufe" :key="index">
+          <template #icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+          </template>
+          <template #heading>{{ Lauf.titel }}</template>
+          <p style="padding: 20px 0 10px 0">{{ Lauf.datum }}</p>
+          <p style="padding-top: 10px;">{{ Lauf.art }}</p>
+          <p style="padding-top: 10px;">{{ Lauf.distanz }} km</p>
+          <p style="padding-top: 10px;">{{ Lauf.beschreibung }}</p>
+        </itemBox>
+      </div>
+      </div>
   </div>
 </template>
 
-// script
 <script setup lang="ts">
 import router from "@/router";
-import { onMounted, ref, type Ref } from "vue";
+import { onMounted, ref, type Ref, computed } from "vue";
 import itemBox from '@/components/lauf-item.vue';
-import tage from '@/components/lauf-item.vue';
 
 defineProps<{
     title: string
@@ -83,50 +75,84 @@ function handleClick() {
 
 export type Lauf = { id?: number, titel: string, datum: Date, art: string, distanz: number, zeit: string, gefuehl: string, aufwand: number, beschreibung: string, schmerz: string }
 const alleLaeufe: Ref<Lauf[]> = ref([]);
+const currentWeekLäufe = computed(() => {
+  const { startDate, endDate } = getCurrentWeekRange();
+  return alleLaeufe.value.filter(lauf => {
+      const laufDate = new Date(lauf.datum);
+      return laufDate >= startDate && laufDate <= endDate;
+  });
+});
+export type todoLauf = { id?: number, titel: string, datum: Date, art: string, distanz: number, beschreibung: string, status: boolean }
+const alleToDoLaeufe: Ref<todoLauf[]> = ref([]);
+const currentWeekToDoLäufe = computed(() => {
+  const { startDate, endDate } = getCurrentWeekRange();
+  return alleToDoLaeufe.value.filter(todolauf => {
+      const todolaufDate = new Date(todolauf.datum);
+      return todolaufDate >= startDate && todolaufDate <= endDate;
+  });
+});
+
 
 function loadLaeufe() {
     const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-    console.log('baseUrl', baseUrl);
     
     const endPoint = baseUrl + '/alleLaeufe';
     const requestOptions: RequestInit = {
         method: "GET",
         redirect: "follow"
     };
-    console.log('requestOptions:', requestOptions);
-    
-    fetch(endPoint, requestOptions)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Assuming `data` is an array of Lauf objects
-            alleLaeufe.value = data; // Update alleLaeufe with fetched data
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
 
-    // fetch(endPoint, requestOptions)
-    // .then(response => response.json())
-    // // .then(result => {
-    // //   alleLaeufe.value = result;
-    // // })
+    fetch(endPoint, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      alleLaeufe.value = result;
+    })
     // .then(result => result.forEach((l: Lauf) => {
     //   console.log("result", result);
       
     //     alleLaeufe.value.push(l)
     // }))
-    // .catch(error => console.log('error', error))
+    .catch(error => console.log('error', error))
+}
+
+function loadToDoLaeufe() {
+    const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    
+    const endPoint = baseUrl + '/alleToDoLaufs';
+    const requestOptions: RequestInit = {
+        method: "GET",
+        redirect: "follow"
+    };
+
+    fetch(endPoint, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      alleToDoLaeufe.value = result;
+    })
+    // .then(result => result.forEach((l: Lauf) => {
+    //   console.log("result", result);
+      
+    //     alleLaeufe.value.push(l)
+    // }))
+    .catch(error => console.log('error', error))
 }
 
 onMounted(() => {
     loadLaeufe()
-    
+    loadToDoLaeufe()
 })
+
+function getCurrentWeekRange() {
+    const now = new Date();
+    const firstDay = now.getDate() - now.getDay() + 1; // Monday as the first day of the week
+    const lastDay = firstDay + 6; // Sunday as the last day of the week
+
+    const startDate = new Date(now.setDate(firstDay));
+    const endDate = new Date(now.setDate(lastDay));
+
+    return { startDate, endDate };
+}
+
 </script>
 
 <style scoped>
