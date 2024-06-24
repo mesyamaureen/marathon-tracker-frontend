@@ -8,52 +8,21 @@
         <slot />  <!-- This is the default slot -->
       </p>
     </div>
-    <button class="lauf-item__button" @click="$emit('click')">X</button>
+    <button class="lauf-item__button" @click="$emit('edit', laufId)">
+      <font-awesome-icon :icon="['fas', 'edit']" />
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: 'lauf-item',
+  props: {
+    laufId: {
+      type: Number
+    }
+  }
 }
-// console.log("enter lauf-item component")
-// export default {
-//   data() {
-//     return {
-//       laufDieserWoche: true,
-//       tage: [
-//         { heading: 'Montag', description: '50 Läufer', km: '10 km', feeling: 'Gut' },
-//         { heading: 'Dienstag', description: '20 Trainer', km: '15 km', feeling: 'Müde' },
-//         { heading: 'Mittwoch', description: '50 km', km: '20 km', feeling: 'Stark' },
-//         { heading: 'Donnerstag', description: '120 Std', km: '25 km', feeling: 'Erschöpft' },
-//         { heading: 'Freitag', description: '120 Std', km: '30 km', feeling: 'Gut' },
-//         { heading: 'Samstag', description: '120 Std', km: '35 km', feeling: 'Super' },
-//         { heading: 'Sonntag', description: '120 Std', km: '40 km', feeling: 'Erholt' }
-//       ]
-//     }
-//   },
-//   computed: {
-//     filteredTage() {
-//       return this.tage.map(tag => {
-//         if (this.laufDieserWoche) {
-//           return {
-//             heading: tag.heading,
-//             description: tag.description,
-//             km: tag.km,
-//             feeling: tag.feeling
-//           };
-//         } else {
-//           return {
-//             heading: tag.heading,
-//             description: tag.description,
-//             km: tag.km
-//           };
-//         }
-//       });
-//     }
-//   }
-// }
-// console.log("done lauf-item component");
 </script>
 
 <style scoped>
@@ -64,7 +33,7 @@ export default {
   height: 270px;
   margin-top: 2rem;
   border: 2px solid grey;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 
 .lauf-item__icon {
@@ -110,6 +79,7 @@ export default {
   .lauf-item {
     margin-top: 0;
     padding: 0.4rem 0 1rem 2rem;
+    border-radius: 8px;
   }
 
   .lauf-item__icon {

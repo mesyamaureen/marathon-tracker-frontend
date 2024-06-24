@@ -5,6 +5,7 @@ import {
  faPersonRunning,
  faPlus,
  faUser,
+ faEdit
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -12,4 +13,5 @@ library.add(
  faPersonRunning,
  faPlus,
  faUser,
+ faEdit
 )
