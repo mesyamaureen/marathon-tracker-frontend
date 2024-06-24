@@ -20,7 +20,10 @@
     methods: {
       close() {
         this.$emit('close');
-      }
+      },
+      save() {
+      this.$emit('save');
+    }
     }
   }
   </script>
