@@ -5,18 +5,6 @@ import sidebarNav from '@/components/sidebar-nav.vue'
 
 <template>
   <sidebar-nav />
-  <!-- <header>
-    <RouterLink to="/startseite-laufer">
-      <img alt="Vue logo" class="logo" src="@/assets/runnerslog_logo.png" width="350" height="70"/>
-    </RouterLink>
-
-    <nav>
-        <RouterLink :to="{ name: 'Neuer lauf' }">Neuer Lauf</RouterLink>
-        <RouterLink to="/MeinProfil">Mein Profil</RouterLink>
-        <RouterLink to="/">Ausloggen</RouterLink>
-      </nav>
-  </header> -->
-
   <RouterView class="content"/>
 </template>
 
