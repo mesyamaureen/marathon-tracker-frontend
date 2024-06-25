@@ -2,6 +2,8 @@
 import { onMounted, ref, type Ref } from 'vue';
 import { type todoLauf } from '@/components/lauf/alle-laeufe.vue'
 import router from '@/router';
+import axios from 'axios';
+
 defineProps<{
     title: string
 }>()
@@ -14,9 +16,8 @@ const beschreibungField = ref('')
 const statusField = ref(false)
 
 function createToDoLauf() {
-    // const endPoint = 'http://localhost:5432/lauf';
     const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-    const endPoint = baseUrl + '/todolauf';
+    const endPoint = `${baseUrl}/todolauf`
     const neuerToDoLauf: todoLauf = {
         datum: datumField.value,
         art: artField.value,
@@ -25,20 +26,19 @@ function createToDoLauf() {
         beschreibung: beschreibungField.value,
         status: statusField.value
     }
-    const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(neuerToDoLauf)
-    }
-    fetch(endPoint, requestOptions)
-    .then(r => r.json())
-    .then(nTdL => {
-        console.log('Success: ', nTdL);
-        router.push({ name: 'Startseite Laufer' });
+
+    axios.post(endPoint, neuerToDoLauf, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
-    .catch(error => console.log('error', error));
+    .then(response => {
+        console.log('Success: ', response.data)
+        router.push({ name: 'Startseite Laufer' })
+    })
+    .catch(error => {
+        console.log('Error: ', error)
+    })
 }
 </script>
 

@@ -78,7 +78,12 @@
         <p style="padding-top: 10px">{{ Lauf.distanz }} km</p>
         <p style="padding-top: 10px">{{ Lauf.beschreibung }}</p>
       </itemBox>
-      <Modal :isOpen="isLaufModalOpen" @close="closeModalLauf" @save="saveLauf" @delete="deleteLauf">
+      <Modal
+        :isOpen="isLaufModalOpen"
+        @close="closeModalLauf"
+        @save="saveLauf"
+        @delete="deleteLauf"
+      >
         <div class="modal-content-detail">
           <div v-if="selectedLauf">
             <h4>To Do Lauf bearbeiten</h4>
@@ -177,51 +182,38 @@ function closeModalToDoLauf() {
 }
 
 function loadLaeufe() {
-  const endPoint = baseUrl + '/alleLaeufe'
-  const requestOptions: RequestInit = {
-    method: 'GET',
-    redirect: 'follow'
-  }
+  const endPoint = `${baseUrl}/alleLaeufe`
 
-  fetch(endPoint, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      alleLaeufe.value = result
+  axios
+    .get(endPoint)
+    .then((response) => {
+      alleLaeufe.value = response.data
     })
-    .catch((error) => console.log('error', error))
+    .catch((error) => {
+      console.error('Error loading Laeufe:', error)
+    })
 }
 
 function loadToDoLaeufe() {
-  const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+  const endPoint = `${baseUrl}/alleToDoLaufs`
 
-  const endPoint = baseUrl + '/alleToDoLaufs'
-  const requestOptions: RequestInit = {
-    method: 'GET',
-    redirect: 'follow'
-  }
-
-  fetch(endPoint, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      alleToDoLaeufe.value = result
+  axios
+    .get(endPoint)
+    .then((response) => {
+      alleToDoLaeufe.value = response.data
     })
-    .catch((error) => console.log('error', error))
+    .catch((error) => {
+      console.error('Error loading Laeufe:', error)
+    })
 }
 
 function saveToDoLauf() {
-  console.log('into save Todo Lauf')
-  console.log('selectedToDoLauf: ', selectedToDoLauf.value)
-
-  if (selectedToDoLauf.value) {
+if (selectedToDoLauf.value) {
     try {
-      console.log('fetching starts')
-
       axios.put<todoLauf>(
         `${baseUrl}/alleToDoLaufs/${selectedToDoLauf.value.id}`,
         selectedToDoLauf.value
       )
-      console.log('fetching done')
-
       closeModalToDoLauf()
     } catch (error) {
       console.error('Failed to save the To Do Lauf:', error)
@@ -229,18 +221,10 @@ function saveToDoLauf() {
   }
 }
 
-
 function saveLauf() {
-  console.log('into save Lauf')
-  console.log('selected Lauf: ', selectedLauf.value)
-
-  if (selectedLauf.value) {
+if (selectedLauf.value) {
     try {
-      console.log('fetching starts')
-
       axios.put<Lauf>(`${baseUrl}/alleLaeufe/${selectedLauf.value.id}`, selectedLauf.value)
-      console.log('fetching done')
-
       closeModalToDoLauf()
     } catch (error) {
       console.error('Failed to save the Lauf:', error)
@@ -249,14 +233,9 @@ function saveLauf() {
 }
 
 function deleteToDoLauf() {
-  console.log('Entered deleteToDoLauf function')
-  console.log('selectedToDoLauf: ', selectedToDoLauf.value)
-
   if (selectedToDoLauf.value) {
     try {
-      console.log('Starting API call to delete ToDoLauf')
       axios.delete(`${baseUrl}/alleToDoLaufs/${selectedToDoLauf.value.id}`)
-      console.log('API call successful, closing modal')
       closeModalToDoLauf()
 
       // Check if selectedToDoLauf is not null before filtering
@@ -266,7 +245,7 @@ function deleteToDoLauf() {
           (todolauf) => todolauf.id !== selectedToDoLauf.value?.id
         )
       }
-      loadToDoLaeufe() // Reload ToDoLäufe to update the list after deletion
+      loadToDoLaeufe()
     } catch (error) {
       console.error('Failed to delete the To Do Lauf:', error)
     }
@@ -276,22 +255,14 @@ function deleteToDoLauf() {
 }
 
 function deleteLauf() {
-  console.log('Entered deleteLauf function')
-  console.log('selected Lauf: ', selectedLauf.value)
-
   if (selectedLauf.value) {
     try {
-      console.log('Starting API call to delete Lauf')
       axios.delete(`${baseUrl}/alleLaeufe/${selectedLauf.value.id}`)
-      console.log('API call successful, closing modal')
       closeModalLauf()
-
       // Check if selectedLauf is not null before filtering
       if (selectedLauf.value) {
         // Remove the deleted Lauf from the alleToDoLaeufe array
-        alleLaeufe.value = alleLaeufe.value.filter(
-          (lauf) => lauf.id !== selectedLauf.value?.id
-        )
+        alleLaeufe.value = alleLaeufe.value.filter((lauf) => lauf.id !== selectedLauf.value?.id)
       }
       loadLaeufe() // Reload Läufe to update the list after deletion
     } catch (error) {

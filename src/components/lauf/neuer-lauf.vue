@@ -2,6 +2,7 @@
 import { onMounted, ref, type Ref } from 'vue';
 import { type Lauf } from './alle-laeufe.vue';
 import router from '@/router';
+import axios from 'axios';
 defineProps<{
     title: string
 }>()
@@ -17,10 +18,9 @@ const beschreibungField = ref('')
 const schmerzField = ref('')
 
 function createLauf() {
-    // const endPoint = 'http://localhost:5432/lauf';
     const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-    const endPoint = baseUrl + '/lauf';
-    const neuLauf: Lauf = {
+    const endPoint = `${baseUrl}/lauf`
+    const neuLauf = {
         datum: datumField.value,
         art: artField.value,
         titel: titelField.value,
@@ -31,20 +31,19 @@ function createLauf() {
         beschreibung: beschreibungField.value,
         schmerz: schmerzField.value
     }
-    const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(neuLauf)
-    }
-    fetch(endPoint, requestOptions)
-    .then(r => r.json())
-    .then(nL => {
-        console.log('Success: ', nL);
-        router.push({ name: 'Startseite Laufer' });
+
+    axios.post(endPoint, neuLauf, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
-    .catch(error => console.log('error', error));
+    .then(response => {
+        console.log('Success: ', response.data)
+        router.push({ name: 'Startseite Laufer' })
+    })
+    .catch(error => {
+        console.log('Error: ', error)
+    })
 }
 </script>
 
