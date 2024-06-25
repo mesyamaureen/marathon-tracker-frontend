@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import startseiteLauferVue from '@/views/startseite-laufer.vue'
-import neuerLauf from '@/views/Laufer/neuer-lauf.vue'
-import einzLauf from '@/views/Laufer/lauf.vue'
+import neuerLauf from '@/views/neuer-lauf.vue'
 import todoLauf from '@/views/neuer-todo-lauf.vue'
 
 const router = createRouter({
@@ -16,11 +15,6 @@ const router = createRouter({
       path: '/neuer-lauf',
       name: 'Neuer lauf',
       component: neuerLauf
-    },
-    {
-      path: '/lauf',
-      name: 'Lauf',
-      component: einzLauf
     },
     {
       path: '/neuer-todo-lauf',
