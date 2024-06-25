@@ -229,7 +229,7 @@ function saveToDoLauf() {
   }
 }
 
-// TODO: saveLauf()
+
 function saveLauf() {
   console.log('into save Lauf')
   console.log('selected Lauf: ', selectedLauf.value)
@@ -247,7 +247,7 @@ function saveLauf() {
     }
   }
 }
-// TODO: deleteToDoLauf()
+
 function deleteToDoLauf() {
   console.log('Entered deleteToDoLauf function')
   console.log('selectedToDoLauf: ', selectedToDoLauf.value)
@@ -274,7 +274,7 @@ function deleteToDoLauf() {
     console.log('No ToDoLauf selected')
   }
 }
-// TODO: deleteLauf()
+
 function deleteLauf() {
   console.log('Entered deleteLauf function')
   console.log('selected Lauf: ', selectedLauf.value)
