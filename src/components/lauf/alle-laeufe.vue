@@ -8,7 +8,10 @@
     <h2>To Do Läufe</h2>
     <div class="items">
       <itemBox
-        v-for="(ToDoLauf, index) in currentWeekToDoLäufe" :key="index" @edit="openModalToDoLauf(ToDoLauf)">
+        v-for="(ToDoLauf, index) in currentWeekToDoLäufe"
+        :key="index"
+        @edit="openModalToDoLauf(ToDoLauf)"
+      >
         <template #icon>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,82 +27,83 @@
             />
           </svg>
         </template>
-        <template #heading>{{ ToDoLauf.titel }}</template>
-        <p style="padding: 20px 0 10px 0">{{ ToDoLauf.datum }}</p>
+        <template #heading>{{ ToDoLauf.datum }}</template>
+        <p style="padding: 20px 0 10px 0">{{ ToDoLauf.titel }}</p>
         <p style="padding-top: 10px">{{ ToDoLauf.art }}</p>
         <p style="padding-top: 10px">{{ ToDoLauf.distanz }} km</p>
         <p style="padding-top: 10px">{{ ToDoLauf.beschreibung }}</p>
       </itemBox>
-      <Modal :isOpen="isToDoLaufModalOpen" @close="closeModalToDoLauf">
+      <Modal
+        :isOpen="isToDoLaufModalOpen"
+        @close="closeModalToDoLauf"
+        @save="saveToDoLauf"
+        @delete="deleteToDoLauf"
+      >
         <div class="modal-content-detail">
           <div v-if="selectedToDoLauf">
             <h4>To Do Lauf bearbeiten</h4>
-            <input v-model="selectedToDoLauf.titel" placeholder="Titel" type="text">
-            <input v-model="selectedToDoLauf.datum" placeholder="YYYY-MM-DD" type="date">
-            <input v-model="selectedToDoLauf.art" placeholder="Art" type="text">
-            <input v-model="selectedToDoLauf.distanz" placeholder="Distanz" type="number">
-            <input v-model="selectedToDoLauf.beschreibung" placeholder="Beschreibung" type="text">
-            <button type="button" @click="$emit('save')">Speichern</button>
-            <button type="button" @click="$emit('delete')">Löschen</button>
+            <input v-model="selectedToDoLauf.datum" placeholder="YYYY-MM-DD" type="date" />
+            <input v-model="selectedToDoLauf.titel" placeholder="Titel" type="text" />
+            <input v-model="selectedToDoLauf.art" placeholder="Art" type="text" />
+            <input v-model="selectedToDoLauf.distanz" placeholder="Distanz" type="number" />
+            <input v-model="selectedToDoLauf.beschreibung" placeholder="Beschreibung" type="text" />
           </div>
         </div>
       </Modal>
     </div>
   </div>
 
-
-
-    <div>
-      <h2>Läufe</h2>
-      <div class="items">
-        <itemBox v-for="(Lauf, index) in currentWeekLäufe" :key="index" @edit="openModalLauf(Lauf)">
-          <template #icon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-          </template>
-          <template #heading>{{ Lauf.titel }}</template>
-          <p style="padding: 20px 0 10px 0">{{ Lauf.datum }}</p>
-          <p style="padding-top: 10px">{{ Lauf.art }}</p>
-          <p style="padding-top: 10px">{{ Lauf.distanz }} km</p>
-          <p style="padding-top: 10px">{{ Lauf.beschreibung }}</p>
-        </itemBox>
-        <Modal :isOpen="isLaufModalOpen" @close="closeModalLauf">
-          <div class="modal-content-detail">
-            <div v-if="selectedLauf">
-              <h4>To Do Lauf bearbeiten</h4>
-              <input v-model="selectedLauf.titel" placeholder="Titel" type="text">
-              <input v-model="selectedLauf.datum" placeholder="YYYY-MM-DD" type="date">
-              <input v-model="selectedLauf.art" placeholder="Art" type="text">
-              <input v-model="selectedLauf.distanz" placeholder="Distanz" type="number">
-              <input v-model="selectedLauf.zeit" placeholder="Zeit" type="text">
-              <input v-model="selectedLauf.gefuehl" placeholder="Gefühl" type="number">
-              <input v-model="selectedLauf.beschreibung" placeholder="Beschreibung" type="text">
-              <input v-model="selectedLauf.schmerz" placeholder="Schmerz" type="text">
-              <button type="button" @click="$emit('save')">Speichern</button>
-              <button type="button" @click="$emit('delete')">Löschen</button>
-            </div>
+  <div>
+    <h2>Läufe</h2>
+    <div class="items">
+      <itemBox v-for="(Lauf, index) in currentWeekLäufe" :key="index" @edit="openModalLauf(Lauf)">
+        <template #icon>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+        </template>
+        <template #heading>{{ Lauf.datum }}</template>
+        <p style="padding: 20px 0 10px 0">{{ Lauf.titel }}</p>
+        <p style="padding-top: 10px">{{ Lauf.art }}</p>
+        <p style="padding-top: 10px">{{ Lauf.distanz }} km</p>
+        <p style="padding-top: 10px">{{ Lauf.beschreibung }}</p>
+      </itemBox>
+      <Modal :isOpen="isLaufModalOpen" @close="closeModalLauf" @save="saveLauf" @delete="deleteLauf">
+        <div class="modal-content-detail">
+          <div v-if="selectedLauf">
+            <h4>To Do Lauf bearbeiten</h4>
+            <input v-model="selectedLauf.datum" placeholder="YYYY-MM-DD" type="date" />
+            <input v-model="selectedLauf.titel" placeholder="Titel" type="text" />
+            <input v-model="selectedLauf.art" placeholder="Art" type="text" />
+            <input v-model="selectedLauf.distanz" placeholder="Distanz" type="number" />
+            <input v-model="selectedLauf.zeit" placeholder="Zeit" type="text" />
+            <input v-model="selectedLauf.gefuehl" placeholder="Gefühl" type="text" />
+            <input v-model="selectedLauf.aufwand" placeholder="Aufwand" type="number" />
+            <input v-model="selectedLauf.beschreibung" placeholder="Beschreibung" type="text" />
+            <input v-model="selectedLauf.schmerz" placeholder="Schmerz" type="text" />
           </div>
-        </Modal>
-      </div>
+        </div>
+      </Modal>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import router from '@/router';
-import { onMounted, ref, type Ref, computed } from 'vue';
-import itemBox from '@/components/lauf-item.vue';
-import Modal from '@/components/modal.vue';
+import router from '@/router'
+import { onMounted, ref, type Ref, computed } from 'vue'
+import itemBox from '@/components/lauf-item.vue'
+import Modal from '@/components/modal.vue'
+import axios from 'axios'
 
 defineProps<{
   title: string
@@ -151,6 +155,8 @@ const currentWeekToDoLäufe = computed(() => {
 })
 const selectedToDoLauf = ref<todoLauf | null>(null)
 
+const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
+
 function openModalLauf(lauf: Lauf) {
   selectedLauf.value = lauf
   isLaufModalOpen.value = true
@@ -171,8 +177,6 @@ function closeModalToDoLauf() {
 }
 
 function loadLaeufe() {
-  const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-
   const endPoint = baseUrl + '/alleLaeufe'
   const requestOptions: RequestInit = {
     method: 'GET',
@@ -184,11 +188,6 @@ function loadLaeufe() {
     .then((result) => {
       alleLaeufe.value = result
     })
-    // .then(result => result.forEach((l: Lauf) => {
-    //   console.log("result", result);
-
-    //     alleLaeufe.value.push(l)
-    // }))
     .catch((error) => console.log('error', error))
 }
 
@@ -207,6 +206,100 @@ function loadToDoLaeufe() {
       alleToDoLaeufe.value = result
     })
     .catch((error) => console.log('error', error))
+}
+
+function saveToDoLauf() {
+  console.log('into save Todo Lauf')
+  console.log('selectedToDoLauf: ', selectedToDoLauf.value)
+
+  if (selectedToDoLauf.value) {
+    try {
+      console.log('fetching starts')
+
+      axios.put<todoLauf>(
+        `${baseUrl}/alleToDoLaufs/${selectedToDoLauf.value.id}`,
+        selectedToDoLauf.value
+      )
+      console.log('fetching done')
+
+      closeModalToDoLauf()
+    } catch (error) {
+      console.error('Failed to save the To Do Lauf:', error)
+    }
+  }
+}
+
+// TODO: saveLauf()
+function saveLauf() {
+  console.log('into save Lauf')
+  console.log('selected Lauf: ', selectedLauf.value)
+
+  if (selectedLauf.value) {
+    try {
+      console.log('fetching starts')
+
+      axios.put<Lauf>(`${baseUrl}/alleLaeufe/${selectedLauf.value.id}`, selectedLauf.value)
+      console.log('fetching done')
+
+      closeModalToDoLauf()
+    } catch (error) {
+      console.error('Failed to save the Lauf:', error)
+    }
+  }
+}
+// TODO: deleteToDoLauf()
+function deleteToDoLauf() {
+  console.log('Entered deleteToDoLauf function')
+  console.log('selectedToDoLauf: ', selectedToDoLauf.value)
+
+  if (selectedToDoLauf.value) {
+    try {
+      console.log('Starting API call to delete ToDoLauf')
+      axios.delete(`${baseUrl}/alleToDoLaufs/${selectedToDoLauf.value.id}`)
+      console.log('API call successful, closing modal')
+      closeModalToDoLauf()
+
+      // Check if selectedToDoLauf is not null before filtering
+      if (selectedToDoLauf.value) {
+        // Remove the deleted ToDoLauf from the alleToDoLaeufe array
+        alleToDoLaeufe.value = alleToDoLaeufe.value.filter(
+          (todolauf) => todolauf.id !== selectedToDoLauf.value?.id
+        )
+      }
+      loadToDoLaeufe() // Reload ToDoLäufe to update the list after deletion
+    } catch (error) {
+      console.error('Failed to delete the To Do Lauf:', error)
+    }
+  } else {
+    console.log('No ToDoLauf selected')
+  }
+}
+// TODO: deleteLauf()
+function deleteLauf() {
+  console.log('Entered deleteLauf function')
+  console.log('selected Lauf: ', selectedLauf.value)
+
+  if (selectedLauf.value) {
+    try {
+      console.log('Starting API call to delete Lauf')
+      axios.delete(`${baseUrl}/alleLaeufe/${selectedLauf.value.id}`)
+      console.log('API call successful, closing modal')
+      closeModalLauf()
+
+      // Check if selectedLauf is not null before filtering
+      if (selectedLauf.value) {
+        // Remove the deleted Lauf from the alleToDoLaeufe array
+        alleLaeufe.value = alleLaeufe.value.filter(
+          (lauf) => lauf.id !== selectedLauf.value?.id
+        )
+      }
+      loadLaeufe() // Reload Läufe to update the list after deletion
+    } catch (error) {
+      console.error('Failed to delete the Lauf:', error)
+    }
+  } else {
+    console.log('No Lauf selected')
+  }
 }
 
 onMounted(() => {

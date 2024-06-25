@@ -4,6 +4,8 @@
       <div class="modal-content" @click.stop>
         <slot></slot>
         <button class="close-button" @click="close">X</button>
+        <button type="button" @click="$emit('save')">Speichern</button>
+        <button type="button" @click="$emit('delete')">Löschen</button>
       </div>
     </div>
 </template>
@@ -23,7 +25,26 @@
       },
       save() {
       this.$emit('save');
-    }
+      },
+//       function saveToDoLauf() {
+//   console.log('into save Todo Lauf');
+//   console.log('selectedToDoLauf: ', selectedToDoLauf.value);
+  
+//   if (selectedToDoLauf.value) {
+//     try {
+//       console.log('fetching starts');
+      
+//       axios
+//       .put<todoLauf>(`${baseUrl}/alleLaeufe/${selectedToDoLauf.value.id}`, selectedToDoLauf.value);
+//       console.log('fetching done');
+      
+//       closeModalToDoLauf();
+//       // Optionally, refresh the data or give feedback to the user
+//     } catch (error) {
+//       console.error('Failed to save the To Do Lauf:', error);
+//     }
+//   }
+// }
     }
   }
   </script>
