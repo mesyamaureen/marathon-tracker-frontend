@@ -201,9 +201,10 @@ function loadToDoLaeufe() {
     .get(endPoint)
     .then((response) => {
       alleToDoLaeufe.value = response.data
+      console.log('Loaded ToDoLäufe component:', alleToDoLaeufe.value);
     })
     .catch((error) => {
-      console.error('Error loading Laeufe:', error)
+      console.error('Error loading Laeufe component:', error)
     })
 }
 
