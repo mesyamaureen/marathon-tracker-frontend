@@ -1,7 +1,8 @@
-# runnerslog_frontend
+# Marathon Training Tracker Website
 Deployed Website ist [hier](https://marathon-tracker-frontend.onrender.com) aufrufbar.
+Repository zum Backend: [hier](https://github.com/mesyamaureen/marathon-tracker-backend)
 
-This template should help get you started developing with Vue 3 in Vite.
+-----------------------------------------------------------------------------------------------------------------
 
 ## How to run the project locally?
 
