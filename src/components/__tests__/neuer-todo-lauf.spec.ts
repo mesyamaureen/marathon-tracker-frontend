@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios from 'axios';
 import { createRouter, createWebHistory } from 'vue-router';
 import NeuerToDoLauf from '@/components/todoLauf/neuer-todo-lauf.vue';
-// import { jest } from '@jest/globals';
 
 beforeEach(() => {
   vi.mock('axios');
@@ -47,7 +46,7 @@ describe('NeuerToDoLauf.vue', () => {
         titel: 'Morning Run',
         distanz: 10,
         beschreibung: 'Run in the park',
-        status: String(true),
+        status: String(true)
       },
       {
         headers: {
@@ -60,7 +59,6 @@ describe('NeuerToDoLauf.vue', () => {
   });
 
   it('should handle API errors gracefully', async () => {
-
     const mockError = new Error('Network Error');
     (axios.post as any).mockRejectedValue(mockError);
 
@@ -92,7 +90,7 @@ describe('NeuerToDoLauf.vue', () => {
         titel: 'Morning Run',
         distanz: 10,
         beschreibung: 'Run in the park',
-        status: String(true),
+        status: String(true)
       },
       {
         headers: {
