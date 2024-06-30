@@ -5,7 +5,7 @@
         <slot name="heading" />
       </h3>
       <p class="lauf-item__description">
-        <slot />  <!-- This is the default slot -->
+        <slot /> 
       </p>
     </div>
     <button class="lauf-item__button" @click="$emit('edit', laufId)">
@@ -47,7 +47,6 @@ export default {
 
 .lauf-item__content {
   flex: 1;
-  /* margin-left: 1rem; */
 }
 
 .lauf-item__heading {

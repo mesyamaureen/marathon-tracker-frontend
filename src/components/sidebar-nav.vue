@@ -54,30 +54,3 @@ export default {
 }
 
 </script>
-
-<!-- <style>
-.v-sidebar-menu {
-  --vsm-primary-color: #4285f4;
-  --vsm-base-bg: #ebebeb;
-  --vsm-item-color: #fff;
-  --vsm-item-active-line-color: var(--vsm-primary-color);
-  --vsm-item-open-color: #fff;
-  --vsm-item-open-bg: var(--vsm-primary-color);
-  --vsm-item-hover-bg: #dfedd6;
-  --vsm-icon-color: var(--vsm-item-color);
-  --vsm-icon-bg: #fff;
-  --vsm-mobile-item-color: #fff;
-  --vsm-mobile-item-bg: var(--vsm-primary-color);
-  --vsm-mobile-icon-color: var(--vsm-mobile-item-color);
-  --vsm-mobile-icon-bg: transparent;
-  --vsm-dropdown-bg: #36363b;
-  --vsm-header-item-color: rgba(255, 255, 255, 0.7);
-  --vsm-toggle-btn-color: #fff;
-  --vsm-toggle-btn-bg: #1e1e21;
-  --vsm-item-font-size: 16px;
-  --vsm-item-line-height: 35px;
-  --vsm-item-padding: 10px 15px;
-  --vsm-icon-height: 35px;
-  --vsm-icon-width: 35px;
-}
-</style>    -->

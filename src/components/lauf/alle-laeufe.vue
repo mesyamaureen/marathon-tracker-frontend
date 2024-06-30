@@ -115,7 +115,7 @@ defineProps<{
 }>()
 
 function handleClick() {
-  router.push('/lauf') // TODO: change to route 'Lauf'
+  router.push('/lauf')
 }
 
 export type Lauf = {
@@ -260,12 +260,10 @@ function deleteLauf() {
     try {
       axios.delete(`${baseUrl}/alleLaeufe/${selectedLauf.value.id}`)
       closeModalLauf()
-      // Check if selectedLauf is not null before filtering
       if (selectedLauf.value) {
-        // Remove the deleted Lauf from the alleToDoLaeufe array
         alleLaeufe.value = alleLaeufe.value.filter((lauf) => lauf.id !== selectedLauf.value?.id)
       }
-      loadLaeufe() // Reload Läufe to update the list after deletion
+      loadLaeufe() 
     } catch (error) {
       console.error('Failed to delete the Lauf:', error)
     }
@@ -281,8 +279,8 @@ onMounted(() => {
 
 function getCurrentWeekRange() {
   const now = new Date()
-  const firstDay = now.getDate() - now.getDay() + 1 // Monday as the first day of the week
-  const lastDay = firstDay + 6 // Sunday as the last day of the week
+  const firstDay = now.getDate() - now.getDay() + 1 
+  const lastDay = firstDay + 6 
 
   const startDate = new Date(now.setDate(firstDay))
   const endDate = new Date(now.setDate(lastDay))
@@ -298,7 +296,6 @@ function getCurrentWeekRange() {
   color: blue;
 }
 
-/* styling from startseite-laufer */
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -386,13 +383,13 @@ nav a:first-of-type {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px; /* Adjust size as needed */
-  height: 50px; /* Adjust size as needed */
-  background-color: #000000; /* Change to desired color */
+  width: 50px; 
+  height: 50px; 
+  background-color: #000000; 
   color: #fff;
   border: none;
   border-radius: 50%;
-  font-size: 1.5rem; /* Adjust font size as needed */
+  font-size: 1.5rem;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition:
@@ -404,7 +401,7 @@ nav a:first-of-type {
 }
 
 .circle-button:hover {
-  background-color: #0056b3; /* Change to desired hover color */
+  background-color: #0056b3;
   transform: scale(1.1);
 }
 
